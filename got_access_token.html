@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Access token</title>
+  </head>
+  <body>
+    <h1>We got the access token:</h1>
+    <script>
+        const accessTok = require('electron').remote.getGlobal('accessToken');
+        const tN = document.createTextNode(accessTok);
+        document.body.appendChild(tN);        
+    </script>
+  </body>
+</html>

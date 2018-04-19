@@ -37,7 +37,36 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow();
+
+  // Intercept the redirect and cancel it:
+  const filter = { urls: ['*://*.localhost:*/*'] };
+  electron.session.defaultSession.webRequest.onBeforeRequest(filter, (details, callback) => {
+    console.log('Intercepting call to ' + details.url);
+
+    global.accessToken = details.url.match(/code=([^&]+)/)[1];
+
+    const reDir = url.format({
+      pathname: path.join(__dirname, 'got_access_token.html'),
+      protocol: 'elif:',
+      slashes: true
+    });
+
+    callback({
+      // cancel: true,
+      redirectURL: reDir
+     });
+  });
+
+  // Chromium prevents redir to file://. See https://github.com/electron/electron/issues/9077
+  electron.protocol.registerFileProtocol('elif', (request, callback) => {
+    const path = request.url.substr(8);
+    callback({ path });
+  }, (error) => {
+    if (error) console.error('Failed to register protocol');
+  });
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
