@@ -4,7 +4,7 @@ This demo is based on https://github.com/electron/electron-quick-start, branch `
 
 It demonstrates one way to do a 3-legged OAuth2 with an Electron-based app, **without running a server!**
 
-Here is a summaryApp of the action:
+Here is a summary of the action:
 * Let the user authenticate themselves through the OAuth2 server (GitHub in this demo)
 * Intercept the redirect call from the server - it points to `localhost:3000`, where there is nothing listening. But we never intend to get there!
 * Extract the *authorization code* that the OAuth server puts in the redirect URL and stash it somewhere (in a global variable, in this demo)
