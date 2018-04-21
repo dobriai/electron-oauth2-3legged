@@ -61,7 +61,7 @@ app.on('ready', () => {
 
   // Chromium prevents redir to file://. See https://github.com/electron/electron/issues/9077
   electron.protocol.registerFileProtocol('elif', (request, callback) => {
-    const path = request.url.substr(8);
+    const path = url.parse(request.url).pathname;
     callback({ path });
   }, (error) => {
     if (error) console.error('Failed to register protocol');
