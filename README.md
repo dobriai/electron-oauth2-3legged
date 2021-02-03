@@ -26,9 +26,9 @@ git clone https://github.com/electron/electron-oauth2-3legged
 # Go into the repository
 cd electron-oauth2-3legged
 # Install dependencies
-npm install
+yarn
 # Run the app
-npm start
+yarn start
 ```
 
 To debug the Main Process (the stuff that hapens independently of browser windows), start it so:

@@ -13,7 +13,16 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  })
+  // contextIsolation: See https://github.com/electron/electron/issues/23506 and
+  // https://github.com/electron/electron/blob/master/docs/tutorial/context-isolation.md
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -63,8 +72,7 @@ app.on('ready', () => {
   electron.protocol.registerFileProtocol('elif', (request, callback) => {
     const path = url.parse(request.url).pathname.replace(/^\/(\w:)/, '$1');
     callback({ path });
-  }, (error) => {
-    if (error) console.error('Failed to register protocol');
+    console.log(`Survived the callback witj ${path}`);
   });
 });
 

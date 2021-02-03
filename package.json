@@ -1,6 +1,6 @@
 {
   "name": "electron-oauth2-3legged",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
@@ -18,6 +18,6 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^1.8.4"
+    "electron": ">=9.4.0"
   }
 }
